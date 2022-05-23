@@ -1,0 +1,92 @@
+package views;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JPasswordField;
+import java.awt.Font;
+import java.awt.GridLayout;
+import javax.swing.BoxLayout;
+import java.awt.Component;
+
+public class Login extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JButton okButton;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Login dialog = new Login();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Login() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.X_AXIS));
+		{
+			lblNewLabel = new JLabel("Login");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 32));
+			lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+			contentPanel.add(lblNewLabel);
+		}
+		{
+			lblNewLabel_1 = new JLabel("New label");
+			lblNewLabel_1.setAlignmentX(Component.CENTER_ALIGNMENT);
+			contentPanel.add(lblNewLabel_1);
+		}
+		{
+			JPanel buttonPane = new JPanel();
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				okButton = new JButton("Login");
+				okButton.setActionCommand("OK");
+				getRootPane().setDefaultButton(okButton);
+			}
+			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
+			gl_buttonPane.setHorizontalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addGap(177)
+						.addComponent(okButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+						.addGap(179))
+			);
+			gl_buttonPane.setVerticalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(okButton, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+						.addContainerGap())
+			);
+			buttonPane.setLayout(gl_buttonPane);
+		}
+	}
+}

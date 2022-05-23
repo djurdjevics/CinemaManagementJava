@@ -1,0 +1,35 @@
+package common;
+
+import java.sql.*;
+import java.util.UUID;
+
+import common.UniversalHelper;
+
+import common.Models.MovieModel;
+
+public class MovieHelper {
+	UniversalHelper helper = new UniversalHelper();
+	
+	public ResultSet InsertMovie(MovieModel movie) throws SQLException {
+		ResultSet rs = null;
+		Connection conn = helper.DBSetup();
+		String id = movie.id.toString();
+		String title = movie.Title;
+		String rating = String.valueOf(movie.rating);
+		String year = String.valueOf(movie.year);
+		String current = (movie.current==true)?String.valueOf(0):String.valueOf(1);
+		String hasOscar = (movie.hasOscar==true)?String.valueOf(0):String.valueOf(1);
+		String bannerURL = (movie.bannerUrl == null)?movie.bannerUrl:null;
+		String trailerURL = (movie.trailerUrl == null)?movie.trailerUrl:null;
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = "INSERT INTO Movie VALUES (" + "'" + id + "'"  + "," +  "'" + title + "'" + "," + year + "," + rating + "," + current + "," + hasOscar + "," + bannerURL + "," + trailerURL + ")"; 
+			rs = st.executeQuery(strQuery);
+			
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+		return rs;
+	}
+}

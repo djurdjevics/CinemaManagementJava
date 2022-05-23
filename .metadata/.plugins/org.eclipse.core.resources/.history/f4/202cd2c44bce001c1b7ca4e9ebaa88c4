@@ -1,0 +1,58 @@
+package common;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.UUID;
+
+import common.Models.AuditoriumModel;
+import common.Models.ProjectionModel;
+
+public class AuditoriumHelper {
+	UniversalHelper helper = new UniversalHelper();
+	Connection conn = helper.DBSetup();
+	
+	
+	public int InsertAuditorium(AuditoriumModel auditorium) throws SQLException {
+		String id = String.valueOf(auditorium.ID);
+		String cinemaID = String.valueOf(auditorium.CinemaID);
+		String auditName = auditorium.AuditName;
+		int insertedId;
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = "INSERT INTO Auditorium  output INSERTED.Id VALUES (" + "'" + id + "'"  + "," +  "'" + auditName + "'" + "," + cinemaID + ")"; 
+			ResultSet rs = st.executeQuery(strQuery);
+			conn.close();
+			
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			conn.close();
+		}
+	}
+	
+	public void DeleteAuditorium(int id) throws SQLException {
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = "DELETE  FROM Auditorium WHERE id = " + "'" + id + "'";
+			st.execute(strQuery);
+			conn.close();
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			conn.close();
+		}
+	}
+	
+	public void UpdateAuditorium(AuditoriumModel auditorium) throws SQLException {
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = String.format("UPDATE Auditorium SET name = '%s',cinemaId = %d WHERE id = '%d'",auditorium.AuditName,auditorium.CinemaID,auditorium.ID);
+			st.execute(strQuery);
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+}
