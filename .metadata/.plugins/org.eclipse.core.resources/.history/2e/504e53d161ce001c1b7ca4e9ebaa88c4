@@ -1,0 +1,102 @@
+package views;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.JPasswordField;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+public class Login extends JDialog {
+
+	private final JPanel contentPanel = new JPanel();
+	private JTextField textField;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JButton okButton;
+	private JPasswordField passwordField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		try {
+			Login dialog = new Login();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create the dialog.
+	 */
+	public Login() {
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			lblNewLabel = new JLabel("Username:");
+			lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		}
+		{
+			lblNewLabel_1 = new JLabel("Password:");
+		}
+		{
+			textField = new JTextField();
+			textField.setColumns(15);
+		}
+		
+		passwordField = new JPasswordField();
+		contentPanel.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JLabel lblNewLabel_2 = new JLabel("LOGIN");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 32));
+		contentPanel.add(lblNewLabel_2);
+		contentPanel.add(lblNewLabel);
+		contentPanel.add(textField);
+		contentPanel.add(lblNewLabel_1);
+		contentPanel.add(passwordField);
+		{
+			JPanel buttonPane = new JPanel();
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				okButton = new JButton("Login");
+				okButton.setActionCommand("OK");
+				getRootPane().setDefaultButton(okButton);
+			}
+			GroupLayout gl_buttonPane = new GroupLayout(buttonPane);
+			gl_buttonPane.setHorizontalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_buttonPane.createSequentialGroup()
+						.addGap(177)
+						.addComponent(okButton, GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+						.addGap(179))
+			);
+			gl_buttonPane.setVerticalGroup(
+				gl_buttonPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(Alignment.TRAILING, gl_buttonPane.createSequentialGroup()
+						.addContainerGap()
+						.addComponent(okButton, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+						.addContainerGap())
+			);
+			buttonPane.setLayout(gl_buttonPane);
+		}
+	}
+}

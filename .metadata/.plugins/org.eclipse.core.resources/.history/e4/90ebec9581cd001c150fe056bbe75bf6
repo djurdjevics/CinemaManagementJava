@@ -1,0 +1,57 @@
+package common;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.UUID;
+
+import common.Models.AuditoriumModel;
+import common.Models.ProjectionModel;
+
+public class AuditoriumHelper {
+	UniversalHelper helper = new UniversalHelper();
+	Connection conn = helper.DBSetup();
+	
+	
+	public void InsertAuditorium(AuditoriumModel auditorium) throws SQLException {
+		String id = projection.ProjectionID.toString();
+		String movieId = projection.MovieID.toString();
+		String auditoriumId = String.valueOf(projection.AuditoriumID);
+		String dateTime = projection.ProjectionTime.toString();
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = "INSERT INTO Projection VALUES (" + "'" + id + "'"  + "," +  "'" + movieId + "'" + "," + auditoriumId + "'" + dateTime + "')"; 
+			st.execute(strQuery);
+			conn.close();
+			
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			conn.close();
+		}
+	}
+	
+	public void DeleteAuditorium(int id) throws SQLException {
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = "DELETE  FROM Projection WHERE id = " + "'" + id + "'";
+			st.execute(strQuery);
+			conn.close();
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+			conn.close();
+		}
+	}
+	
+	public void UpdateMovie(AuditoriumModel projection) throws SQLException {
+		try {
+			Statement st = conn.createStatement();
+			String strQuery = String.format("UPDATE Projection SET movieId = '%s',auditoriumId = %d, projectionTime = '%s',WHERE id = '%s'",projection.MovieID,projection.AuditoriumID,projection.ProjectionTime,projection.ProjectionID);
+			st.execute(strQuery);
+		}
+		catch(SQLException ex) {
+			System.out.println(ex.getMessage());
+		}
+	}
+}

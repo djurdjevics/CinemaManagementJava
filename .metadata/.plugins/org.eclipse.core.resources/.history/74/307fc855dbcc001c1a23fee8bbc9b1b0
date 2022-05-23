@@ -1,0 +1,45 @@
+package common.Models;
+
+import java.sql.ResultSetMetaData;
+
+import javax.swing.table.AbstractTableModel;
+
+public class BooleanTableModel extends AbstractTableModel{
+	String[] columns = {"ID","Naslov","Godina","Ocena","U projekciji","Ima oskara","Slika","Trailer URL"};
+	Object[][] data;
+	
+	public BooleanTableModel(Object[][] _data,String[] _columns) {
+		data = _data;
+		columns = _columns;
+	}
+
+	@Override
+	public int getRowCount() {
+		// TODO Auto-generated method stub
+		return data.length;
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return columns.length;
+	}
+
+	@Override
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		// TODO Auto-generated method stub
+		return data[rowIndex][columnIndex];
+	}
+	
+	@Override
+	public String getColumnName(int column) {
+		return columns[column];
+	}
+	
+	
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+    	if(data[0][columnIndex]==null) return Object.class;
+        return data[0][columnIndex].getClass();
+    }
+}

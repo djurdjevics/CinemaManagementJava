@@ -1,0 +1,5 @@
+package common.Models;
+
+public class AuditoriumModel {
+
+}
